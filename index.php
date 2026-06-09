@@ -16,4 +16,22 @@ the_posts_pagination();
 ?>
 </article>
 
+<?php    
+    $args = [
+        'post_type'=>'games',
+        'posts_per_page'=>5; 
+        'category__not_in'=>'another-slug'
+        ];
+        
+    $query = new WP_Query($args);
+    
+    if($query -> have_posts()){
+        while ($query -> have_posts()){
+            $query -> the_post();
+            echo apply_filters('the_content', $query->post->post_content);
+        }
+    }
+
+?>
+
 <?php get_footer(); ?>
