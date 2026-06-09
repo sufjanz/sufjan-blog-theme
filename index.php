@@ -29,6 +29,17 @@ the_posts_pagination();
         while ($query -> have_posts()){
             $query -> the_post();
             echo apply_filters('the_content', $query->post->post_content);
+
+            if(comments_open()||get_comments_number()):
+                comments_template();
+            endif;
+
+            the_post_navigation(
+                array(
+                'next_text'=>'<span>'__("Next", 'twentyfifteen')'</span>',
+                "prev_text"=>'<span>'__("Previous", 'twentyfifteen')'</span>'
+                )
+            )
         }
     }
 
